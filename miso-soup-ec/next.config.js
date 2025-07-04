@@ -9,8 +9,9 @@ const nextConfig = {
   },
   output: 'export', // 静的エクスポート
   trailingSlash: true, // GitHub Pages用
-  basePath: process.env.NODE_ENV === 'production' ? '/miso-soup-ec' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/miso-soup-ec/' : '',
+  // GitHub Pagesのサブパス設定（リポジトリ名が必要な場合のみ）
+  // basePath: process.env.NODE_ENV === 'production' ? '/your-repo-name' : '',
+  // assetPrefix: process.env.NODE_ENV === 'production' ? '/your-repo-name/' : '',
 }
 
 module.exports = nextConfig
