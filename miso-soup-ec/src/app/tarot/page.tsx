@@ -458,7 +458,7 @@ export default function TarotPage() {
                   textAlign: 'center',
                   lineHeight: '1.6'
                 }}>
-                  "{question}"
+                  &ldquo;{question}&rdquo;
                 </p>
               </div>
 

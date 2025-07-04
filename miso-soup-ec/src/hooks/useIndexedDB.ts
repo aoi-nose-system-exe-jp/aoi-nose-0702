@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DatabaseService } from '@/lib/indexeddb';
 import { Product, CartItem, Order, User } from '@/types';
 
@@ -33,7 +33,7 @@ export function useCart(userId: string | null) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchCart = async () => {
+  const fetchCart = useCallback(async () => {
     if (!userId) return;
     
     try {
@@ -45,7 +45,7 @@ export function useCart(userId: string | null) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
 
   const addToCart = async (productId: string, quantity: number) => {
     if (!userId) return;
@@ -98,7 +98,7 @@ export function useCart(userId: string | null) {
 
   useEffect(() => {
     fetchCart();
-  }, [userId]);
+  }, [userId, fetchCart]);
 
   return {
     cartItems,
@@ -118,7 +118,7 @@ export function useOrders(userId: string | null) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     if (!userId) return;
 
     try {
@@ -130,7 +130,7 @@ export function useOrders(userId: string | null) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
 
   const createOrder = async (order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
@@ -146,7 +146,7 @@ export function useOrders(userId: string | null) {
 
   useEffect(() => {
     fetchOrders();
-  }, [userId]);
+  }, [userId, fetchOrders]);
 
   return {
     orders,
