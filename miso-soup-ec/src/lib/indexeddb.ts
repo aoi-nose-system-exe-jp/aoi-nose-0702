@@ -27,7 +27,7 @@ export interface MisoSoupECDB extends DBSchema {
       createdAt: Date;
       updatedAt: Date;
     };
-    indexes: { 'by-category': string; 'by-active': boolean };
+    indexes: { 'by-category': string; 'by-active': string };
   };
   orders: {
     key: string;
@@ -129,7 +129,7 @@ export class DatabaseService {
 
   static async getActiveProducts() {
     const db = await this.getDatabase();
-    return await db.getAllFromIndex('products', 'by-active', true);
+    return await db.getAllFromIndex('products', 'by-active', 'true');
   }
 
   static async getProductsByCategory(category: string) {
