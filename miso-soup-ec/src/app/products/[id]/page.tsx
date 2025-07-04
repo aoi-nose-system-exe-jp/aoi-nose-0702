@@ -7,6 +7,16 @@ import { useProducts, useCart, useAuth } from '@/hooks/useIndexedDB';
 import { Button } from '@/components/ui/Button';
 import { Product, Review } from '@/types';
 
+// 静的パラメータを生成する関数
+export async function generateStaticParams() {
+  // サンプルデータから商品IDを取得
+  const { sampleProducts } = await import('@/data/sampleData');
+  
+  return sampleProducts.map((product) => ({
+    id: product.id,
+  }));
+}
+
 export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
